@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Motivation & Productivity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Daily Motivation</h1>
+    <p id="quote">Loading quote...</p>
+
+    <h2>My Habits</h2>
+
+    <!-- Habit input form -->
+    <input type="text" id="new-habit" placeholder="Enter a new habit">
+    <button id="add-habit">Add Habit</button>
+
+    <button id="reset-day">Reset Day</button>
+
+    <!-- Habit list -->
+    <ul id="habit-list">
+        <li>
+            <label>
+                <input type="checkbox"> Stretch or light exercise
+            </label>
+            <span class="streak">0-day streak</span>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox"> Healthy snacking & hydration
+            </label>
+            <span class="streak">0-day streak</span>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox"> Read code, not just tutorials
+            </label>
+            <span class="streak">0-day streak</span>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox"> Keep a “learning log”
+            </label>
+            <span class="streak">0-day streak</span>
+        </li>
+
+    </ul>
+    <script src="script.js"></script>
+</body>
+</html>
