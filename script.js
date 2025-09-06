@@ -33,11 +33,15 @@ let habits = JSON.parse(localStorage.getItem('habits')) || [];
 let lastResetDate = localStorage.getItem('lastResetDate');
 
 // Get today's date as a string
-const today = new Date().toDateString();
+const today = new Date().toISOString().split("T")[0]; // "2025-09-06"
+let lastResetDate = localStorage.getItem('lastResetDate');
 
-// If it's a new day, reset completion but keep streaks
+// Daily reset logic
 if (lastResetDate !== today) {
     habits.forEach(habit => {
+        if (habit.completedToday) {
+            habit.lastCompleted = today;
+        }
         habit.completedToday = false;
     });
     localStorage.setItem('lastResetDate', today);
@@ -66,17 +70,16 @@ function renderHabits() {
 
 // Toggle habit completion and update streak
 function toggleHabit(index) {
-    const today = new Date().toDateString();
+    const today = new Date().toISOString().split("T")[0];
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split("T")[0];
 
     if (habits[index].completedToday) {
-        // Unchecking a habit for today
         habits[index].completedToday = false;
         habits[index].streak = Math.max(0, habits[index].streak - 1);
     } else {
-        // Checking a habit for today
-        if (habits[index].lastCompleted === yesterday.toDateString()) {
+        if (habits[index].lastCompleted === yesterdayStr) {
             habits[index].streak += 1;
         } else {
             habits[index].streak = 1;
