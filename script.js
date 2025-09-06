@@ -33,17 +33,26 @@ let habits = JSON.parse(localStorage.getItem('habits')) || [];
 let lastResetDate = localStorage.getItem('lastResetDate');
 
 // Get today's date as a string
-const today = new Date().toISOString().split("T")[0]; // "2025-09-06"
-let lastResetDate = localStorage.getItem('lastResetDate');
+const today = new Date().toISOString().split("T")[0];
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
+const yesterdayStr = yesterday.toISOString().split("T")[0];
 
-// Daily reset logic
 if (lastResetDate !== today) {
     habits.forEach(habit => {
-        if (habit.completedToday) {
-            habit.lastCompleted = today;
+        // Continue streak if habit was completed yesterday
+        if (habit.lastCompleted === yesterdayStr) {
+            if (!habit.completedToday) {
+                habit.streak += 1;
+            }
+        } else {
+            habit.streak = habit.completedToday ? 1 : 0;
         }
+
+        // Reset today's completion
         habit.completedToday = false;
     });
+
     localStorage.setItem('lastResetDate', today);
     saveHabits();
 }
