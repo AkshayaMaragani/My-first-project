@@ -30,4 +30,5 @@ Built using **HTML, CSS, and JavaScript**, this project integrates a live quotes
 
 ---
 
+## HEAD
 Created by Akshaya Maragani – feel free to connect!
